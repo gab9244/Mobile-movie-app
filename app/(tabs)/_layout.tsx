@@ -39,7 +39,7 @@ const _layout = () => {
         backgroundColor: '#0f0D23',
         borderRadius: 50,
         marginHorizontal: 20,
-        marginBottom:36,
+        marginBottom:47,
         height: 52,
         position: "absolute",
         borderWidth: 1,
@@ -66,7 +66,7 @@ const _layout = () => {
           headerShown: false,
           tabBarIcon :({focused}) => (
             <>
-          <TabIcon focused={focused} icon={icons.home} title={"search"}/>
+          <TabIcon focused={focused} icon={icons.search} title={"search"}/>
             </>
           )
         }}
@@ -77,7 +77,7 @@ const _layout = () => {
           headerShown: false,
           tabBarIcon :({focused}) => (
             <>
-          <TabIcon focused={focused} icon={icons.home} title={"Saved"}/>
+          <TabIcon focused={focused} icon={icons.save} title={"Saved"}/>
             </>
           )
           
@@ -89,7 +89,7 @@ const _layout = () => {
           headerShown: false,
           tabBarIcon :({focused}) => (
             <>
-          <TabIcon focused={focused} icon={icons.home} title={"Profile"}/>
+          <TabIcon focused={focused} icon={icons.person} title={"Profile"}/>
             </>
           )
         }}
