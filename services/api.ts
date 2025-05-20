@@ -45,3 +45,6 @@ export const fetchMoviesDetails = async (moviesId: string):Promise<MovieDetails>
       throw error
     }
  }
+
+
+

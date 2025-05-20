@@ -1,13 +1,19 @@
 //  Rastreia a pesquisa feita pelo usuário
-import { Client, Databases, ID, Query } from "react-native-appwrite";
+import { Account, Client, Databases, ID, Query } from 'appwrite';
+// import bcrypt from 'bcryptjs';
+// const salt = bcrypt.genSaltSync(10);
+// const secret = "fvdfg3434fgdff4dfher4teg";
 // É o id do banco de dados no appwrite
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_PROJECT_DATABASE_ID!;
 // É o id da coleção no appwrite
 
 const COLLECTION_ID = process.env.EXPO_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID!;
 
+const USERINFO_ID = process.env.EXPO_PUBLIC_APPWRITE_PROJECT_USERINFO_ID!;
+
+// É o client que lida com as solicitações feitas para o appwrite
 const client = new Client()
-  // Define o endpoint to app
+  // Define o endpoint do app
   .setEndpoint("https://cloud.appwrite.io/v1")
   // Define o id do projeto
   .setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!);
@@ -23,7 +29,7 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
     if (result.documents.length > 0) {
       const existingMovie = result.documents[0];
 
-      // Passamos os atributos
+      // Passamos os parâmetros
       await database.updateDocument(
         // Passamos o id do banco de dados para saber qual banco de dados atualizar
         DATABASE_ID,
@@ -70,3 +76,65 @@ export const getTredingMovies = async (): Promise<TrendingMovie[] | undefined> =
         console.log(error) 
         return undefined}
 }
+
+
+const account = new Account(client)
+
+
+
+export const saveUser = async  (UserName: string, Password:string, Email:string) =>{
+  try{
+
+    const result =  await account.create(ID.unique(), Email, Password, UserName)
+    return {status:"ok", data:result}
+  }catch(error){console.log(error)}
+}
+
+
+export const LoginUser = async  ( Email:string, Password:string) =>{
+  try{
+    await account.deleteSession('current')
+
+     const result = await account.createEmailPasswordSession(Email, Password)
+      
+    console.log(result)
+    return {status:"ok", data:result}
+
+  }catch(error){
+    console.log(error) 
+    throw error
+  }
+}
+
+// export const saveUser = async  (Username: string, Password:string) =>{
+//   const hasPassword = bcrypt.hashSync(Password!, salt)
+
+//   try{
+//    const result =  await database.createDocument(DATABASE_ID, USERINFO_ID, ID.unique(), {
+//      UserName: Username,
+//      Password: hasPassword
+//     });
+//     return {status: "ok", data:result}
+//   }catch(error){
+//     console.log(error) 
+//     throw error
+//   }
+// }
+
+// export const LoginUser = async  (Username: string, Password:string) =>{
+//   try{
+//    const result =  await database.listDocuments(DATABASE_ID, USERINFO_ID,[ 
+//     Query.equal(`UserName`, Username),
+//     Query.equal(`Password`, Password)
+//     ]);
+//       const pass = bcrypt.compareSync (result.documents[0].Password, Password)
+//       if(pass){
+//     return {status: "ok", data:result}
+
+//       }
+
+//   }catch(error){
+//     console.log(error) 
+//     throw error
+//   }}
+

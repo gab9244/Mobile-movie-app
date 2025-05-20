@@ -27,6 +27,7 @@ const search = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(async () => {
+      // trim() remove os espaços em branco de uma string
       if (searchQuery.trim()) {
         await loadMovies();
         if (movies?.length > 0 && movies?.[0])

@@ -7,6 +7,7 @@ import { fetchMovies } from "@/services/api";
 import { getTredingMovies } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
+import React from "react";
 import {
   Image,
   Text,
@@ -35,6 +36,7 @@ export default function Index() {
       query: "",
     })
   );
+  // Remove filmes populares duplicados 
   const seen = new Set();
   const uniqueMovies = trendingMovies?.filter((movie) => {
     if (seen.has(movie.movie_id)) {

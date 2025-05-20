@@ -73,11 +73,16 @@ const MovieDetails = () => {
               "N/A"
             }
           />
+
+          <TouchableOpacity>
+            <Text className="text-light-200">Save movie</Text>
+          </TouchableOpacity>
         </View>
+
       </ScrollView>
 
       <TouchableOpacity
-        className="absolute bottom-5 left-0 right-0 mx-5 bg-accent rounded-lg py-3.5 flex flex-row items-center justify-center z-50"
+        className="absolute bottom-5 left-0 right-0 mx-5  bg-accent rounded-lg py-3.5 flex flex-row items-center justify-center z-50"
         onPress={router.back}
       >
         <Image
@@ -85,7 +90,7 @@ const MovieDetails = () => {
           className="size-5 mr-1 mt-0.5 rotate-180"
           tintColor={"#fff"}
         />
-        <Text className="text-white font-semibold text-base">GO back</Text>
+        <Text className="text-white font-semibold text-base">Go back</Text>
       </TouchableOpacity>
     </View>
   );
